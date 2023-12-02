@@ -1,4 +1,4 @@
-#include "config.h"
+п»ї#include "config.h"
 #include <iostream>
 #include <fstream>
 #include <limits>
@@ -16,7 +16,7 @@ ConfigSettings configureSettings() {
 		while (getline(configFile, line)) {
 			size_t pos = line.find("backspace_enabled:");
 			if (pos != string::npos) {
-				// Извлекаем значение настройки
+				// РР·РІР»РµРєР°РµРј Р·РЅР°С‡РµРЅРёРµ РЅР°СЃС‚СЂРѕР№РєРё
 				string valueStr = line.substr(pos + 18);
 				settings.backspace_enabled = (valueStr.find("1") != string::npos);
 				configFile.close();
@@ -26,12 +26,12 @@ ConfigSettings configureSettings() {
 		configFile.close();
 	}
 
-	// Если не найдено, предложим пользователю установить настройки
-	cout << "Настройка удаления строки отсутствует. Желаете включить (y/n)? ";
+	// Р•СЃР»Рё РЅРµ РЅР°Р№РґРµРЅРѕ, РїСЂРµРґР»РѕР¶РёРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё
+	cout << "РќР°СЃС‚СЂРѕР№РєР° СѓРґР°Р»РµРЅРёСЏ СЃС‚СЂРѕРєРё РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚. Р–РµР»Р°РµС‚Рµ РІРєР»СЋС‡РёС‚СЊ (y/n)? ";
 	char response;
 	cin >> response;
 
-	// Очистка входного буфера
+	// РћС‡РёСЃС‚РєР° РІС…РѕРґРЅРѕРіРѕ Р±СѓС„РµСЂР°
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 	settings.backspace_enabled = (response == 'y' || response == 'Y');
