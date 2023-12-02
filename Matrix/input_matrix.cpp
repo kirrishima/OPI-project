@@ -1,4 +1,4 @@
-#include <algorithm>
+п»ї#include <algorithm>
 #include "input_matrix.h"
 #include "config.h"
 #include <iostream>
@@ -8,24 +8,24 @@
 #include <fstream>
 using namespace std;
 
-// Функция для ввода матрицы
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РІРІРѕРґР° РјР°С‚СЂРёС†С‹
 std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings){
 	std::vector<std::vector<int>> matrix;
 	string input;
 
 	if (settings.backspace_enabled) {
-		cout << "Включена возможность удаления строки." << endl;
+		cout << "Р’РєР»СЋС‡РµРЅР° РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СѓРґР°Р»РµРЅРёСЏ СЃС‚СЂРѕРєРё." << endl;
 	}
 	else {
-		cout << "Отключена возможность удаления строки." << endl;
+		cout << "РћС‚РєР»СЋС‡РµРЅР° РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СѓРґР°Р»РµРЅРёСЏ СЃС‚СЂРѕРєРё." << endl;
 	}
 
-	cout << "Введите размерность матрицы (формат: nxm или n x m): ";
+	cout << "Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РјР°С‚СЂРёС†С‹ (С„РѕСЂРјР°С‚: nxm РёР»Рё n x m): ";
 	getline(cin, input);
 
 	if (input == "--config") {
 		ConfigSettings newSettings = configureSettings();
-		return inputMatrix(newSettings); // Рекурсивный вызов с новыми настройками
+		return inputMatrix(newSettings); // Р РµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹Р·РѕРІ СЃ РЅРѕРІС‹РјРё РЅР°СЃС‚СЂРѕР№РєР°РјРё
 	}
 
 	regex pattern("\\s*(\\d+)\\s*[xX]\\s*(\\d+)\\s*");
@@ -36,11 +36,11 @@ std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings){
 		int cols = stoi(matches[2]);
 
 		if (rows <= 0 || cols <= 0) {
-			cerr << "Ошибка: Некорректные размеры матрицы." << endl;
+			cerr << "РћС€РёР±РєР°: РќРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ СЂР°Р·РјРµСЂС‹ РјР°С‚СЂРёС†С‹." << endl;
 			return matrix;
 		}
 
-		cout << "Введите элементы матрицы (" << rows << "x" << cols << "):" << endl;
+		cout << "Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚С‹ РјР°С‚СЂРёС†С‹ (" << rows << "x" << cols << "):" << endl;
 
 		for (int i = 0; i <= rows; ++i) {
 			string inputLine;
@@ -54,7 +54,7 @@ std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings){
 					i -= 2;
 				}
 				else {
-					cerr << "Ошибка: Нет строк для удаления." << endl;
+					cerr << "РћС€РёР±РєР°: РќРµС‚ СЃС‚СЂРѕРє РґР»СЏ СѓРґР°Р»РµРЅРёСЏ." << endl;
 					i--;
 				}
 			}
@@ -78,7 +78,7 @@ std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings){
 				}
 
 				if (row.size() != cols) {
-					cerr << "Ошибка: Некорректное количество элементов в строке." << endl;
+					cerr << "РћС€РёР±РєР°: РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ СЃС‚СЂРѕРєРµ." << endl;
 					--i;
 				}
 				else {
@@ -88,7 +88,7 @@ std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings){
 		}
 	}
 	else {
-		cerr << "Ошибка: Некорректный формат размерности матрицы." << endl;
+		cerr << "РћС€РёР±РєР°: РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ С„РѕСЂРјР°С‚ СЂР°Р·РјРµСЂРЅРѕСЃС‚Рё РјР°С‚СЂРёС†С‹." << endl;
 	}
 
 	return matrix;
