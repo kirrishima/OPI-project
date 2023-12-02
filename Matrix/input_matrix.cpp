@@ -1,34 +1,32 @@
-﻿#include <algorithm>
-#include "input_matrix.h"
+﻿#include "input_matrix.h"
 #include "config.h"
+#include "display_matrix.h"
 #include <iostream>
 #include <sstream>
 #include <vector>
 #include <regex>
 #include <fstream>
+#include <algorithm>
+#include <Windows.h>
 using namespace std;
 
 // Функция для ввода матрицы
-std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings){
-	std::vector<std::vector<int>> matrix;
+std::vector < std::vector <double >> inputMatrix(const ConfigSettings& settings) {
+	SetConsoleCP(1251);
+	std::vector<std::vector<double>> matrix;
 	string input;
 
-	if (settings.backspace_enabled) {
-		cout << "Включена возможность удаления строки." << endl;
-	}
-	else {
-		cout << "Отключена возможность удаления строки." << endl;
-	}
+	//if (settings.backspace_enabled) {
+	//	cout << "Включена возможность удаления строки." << endl;
+	//}
+	//else {
+	//	cout << "Отключена возможность удаления строки." << endl;
+	//}
 
 	cout << "Введите размерность матрицы (формат: nxm или n x m): ";
 	getline(cin, input);
 
-	if (input == "--config") {
-		ConfigSettings newSettings = configureSettings();
-		return inputMatrix(newSettings); // Рекурсивный вызов с новыми настройками
-	}
-
-	regex pattern("\\s*(\\d+)\\s*[xX]\\s*(\\d+)\\s*");
+	std::regex pattern("\\s*(\\d+)\\s*[xXхХ]\\s*(\\d+)\\s*");
 	smatch matches;
 
 	if (regex_match(input, matches, pattern)) {
@@ -52,13 +50,16 @@ std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings){
 				if (!matrix.empty()) {
 					matrix.pop_back();
 					i -= 2;
+					system("cls");
+					cout << "Введите элементы матрицы (" << rows << "x" << cols << ") по строкам, разделенные пробелами:" << endl;
+					displayMatrix(matrix);
 				}
 				else {
 					cerr << "Ошибка: Нет строк для удаления." << endl;
 					i--;
 				}
 			}
-			else if (settings.backspace_enabled && inputLine != "backspace" && i == rows)  {
+			else if (settings.backspace_enabled && inputLine != "backspace" && i == rows) {
 				return matrix;
 			}
 			else if (!settings.backspace_enabled && i == rows - 1) {
@@ -70,20 +71,23 @@ std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings){
 			add_row_to_matrix:
 
 				istringstream iss(inputLine);
-				vector<int> row;
+				vector<double> row;
 
-				int num;
+				double num;
 				while (iss >> num) {
 					row.push_back(num);
 				}
 
 				if (row.size() != cols) {
-					cerr << "Ошибка: Некорректное количество элементов в строке." << endl;
+					cerr << "Ошибка: Некорректное количество элементов в строке или тип данных." << endl;
 					--i;
 				}
 				else {
 					matrix.push_back(row);
 				}
+			}
+			if (settings.backspace_enabled && inputLine != "backspace" && i == (rows - 1)) {
+				cout << "\nНажмите \"Enter\" чтобы продолжить или введите backspace для удаления последней строки\n" << flush;
 			}
 		}
 	}

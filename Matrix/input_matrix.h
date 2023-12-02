@@ -3,4 +3,4 @@
 #include <vector>
 
 // Функция для ввода матрицы
-std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings);
+std::vector<std::vector<double>> inputMatrix(const ConfigSettings& settings);
