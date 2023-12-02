@@ -1,4 +1,4 @@
-#include <vector>
+п»ї#include <vector>
 
-// Функция для отображения матрицы
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РјР°С‚СЂРёС†С‹
 void displayMatrix(const std::vector<std::vector<int>>& matrix);

@@ -1,6 +1,6 @@
-#pragma once
+п»ї#pragma once
 #include "config.h"
 #include <vector>
 
-// Функция для ввода матрицы
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РІРІРѕРґР° РјР°С‚СЂРёС†С‹
 std::vector<std::vector<int>> inputMatrix(const ConfigSettings& settings);
