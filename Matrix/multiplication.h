@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-// Функция для умножения матрицы на число
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ СѓРјРЅРѕР¶РµРЅРёСЏ РјР°С‚СЂРёС†С‹ РЅР° С‡РёСЃР»Рѕ
 void multiplyMatrixByNumber(std::vector<std::vector<double>>& myMatrix, int number) {
     for (auto& row : myMatrix) {
         for (auto& element : row) {
