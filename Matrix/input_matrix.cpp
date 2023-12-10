@@ -31,7 +31,7 @@ std::vector<std::vector<double>> inputMatrix() {
 			return matrix;
 		}
 
-		cout << "Введите элементы матрицы (" << rows << "x" << cols << "):" << endl;
+		cout << "Введите элементы матрицы (" << rows << "x" << cols << ") построчно: " << endl;
 
 		for (int i = 0; i < rows; ++i) {
 			string inputLine;
