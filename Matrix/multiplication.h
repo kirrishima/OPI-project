@@ -3,10 +3,5 @@
 #include <vector>
 
 // Функция для умножения матрицы на число
-void multiplyMatrixByNumber(std::vector<std::vector<double>>& myMatrix, int number) {
-    for (auto& row : myMatrix) {
-        for (auto& element : row) {
-            element *= number;
-        }
-    }
-}
+void MultiplicationMatrix(const std::vector<std::vector<double>>& matrix);
+
