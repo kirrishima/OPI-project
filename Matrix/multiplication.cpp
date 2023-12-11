@@ -4,17 +4,17 @@
 #include <vector>
 
 void MultiplicationMatrix() {
-    ConfigSettings settings = configureSettings(); // Получение текущих настроек
+    ConfigSettings settings = configureSettings(); // РџРѕР»СѓС‡РµРЅРёРµ С‚РµРєСѓС‰РёС… РЅР°СЃС‚СЂРѕРµРє
     std::vector<std::vector<double>> myMatrix = inputMatrix(settings);
     int number;
-    std::cout << "Введите число для умножения: ";
+    std::cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РґР»СЏ СѓРјРЅРѕР¶РµРЅРёСЏ: ";
     std::cin >> number;
    
 
-    // Умножаем матрицу на число
+    // РЈРјРЅРѕР¶Р°РµРј РјР°С‚СЂРёС†Сѓ РЅР° С‡РёСЃР»Рѕ
     multiplyMatrixByNumber(myMatrix, number);
 
-    // Выводим результат
+    // Р’С‹РІРѕРґРёРј СЂРµР·СѓР»СЊС‚Р°С‚
     for (const auto& row : myMatrix) {
         for (int element : row) {
             std::cout << element << " ";
