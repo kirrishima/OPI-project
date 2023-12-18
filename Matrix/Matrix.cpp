@@ -1,52 +1,36 @@
 ﻿#include <iostream>
 #include <vector>
-#include "input_matrix.h"
-#include "display_matrix.h"
-#include "multiplication_matrix_by_number.h"
-#include "matrix_by_matrix_product.h"
-using namespace std;
 
-int main() {
-	setlocale(LC_ALL, "ru");
-	int mode;
-	cout << "Выберите режим работы программы:" << endl << "1-умножение матрицы на число" << endl << "2-умножение матриц" << endl;
-	cin >> mode;
-
-
-	switch(mode) {
-	case 1:{
-			std::vector<std::vector<double>> myMatrix = inputMatrix();
-			if (!myMatrix.empty()) {
-				cout << "Введенная матрица:" << endl;
-				displayMatrix(myMatrix);
-
-				myMatrix = multiplyMatrixByNumber(myMatrix);
-				cout << "Умноженная матрица:" << endl;
-				displayMatrix(myMatrix);
-
+// Функция для вычисления минора матрицы
+std::vector<std::vector<double>> getMinor(const std::vector<std::vector<double>>& matrix, int row, int col) {
+	std::vector<std::vector<double>> minor;
+	for (int i = 0; i < matrix.size(); ++i) {
+		if (i != row) {
+			std::vector<double> tempRow;
+			for (int j = 0; j < matrix[i].size(); ++j) {
+				if (j != col) {
+					tempRow.push_back(matrix[i][j]);
+				}
 			}
-		}
-	case 2: {
-		cin.ignore();
-
-		std::vector<std::vector<double>> Matrix_A = inputMatrix();
-		cout << "Введенная матрица:" << endl;
-		displayMatrix(Matrix_A);
-
-		std::vector<std::vector<double>> Matrix_B = inputMatrix();
-		cout << "Введенная матрица:" << endl;
-		displayMatrix(Matrix_B);
-		
-		if (!Matrix_A.empty() and !Matrix_B.empty()) {
-
-			std::vector<std::vector<double>> Matrix_res = multiplyMatrixByMatrix(Matrix_A, Matrix_B);
-			cout << "Умноженная матрица:" << endl;
-			displayMatrix(Matrix_res);
-
+			minor.push_back(tempRow);
 		}
 	}
-	}
-
-	return 0;
+	return minor;
 }
-//
+
+// Рекурсивная функция для вычисления определителя матрицы
+double determinant(const std::vector<std::vector<double>>& matrix) {
+
+	if (matrix.size() == 2) {
+		return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+	}
+
+	double det = 0;
+	int sign = 1;
+	for (int i = 0; i < matrix.size(); ++i) {
+		det += sign * matrix[0][i] * determinant(getMinor(matrix, 0, i));
+		sign = -sign;
+	}
+
+	return det;
+}
