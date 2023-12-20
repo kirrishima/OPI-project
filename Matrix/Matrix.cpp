@@ -1,36 +1,84 @@
 ﻿#include <iostream>
 #include <vector>
+#include <Windows.h>
+#include "determinant.h"
+#include "display_matrix.h"
+#include "input_matrix.h"
+#include "matrix_by_matrix_product.h"
+#include "multiplication_matrix_by_number.h"
 
-// Функция для вычисления минора матрицы
-std::vector<std::vector<double>> getMinor(const std::vector<std::vector<double>>& matrix, int row, int col) {
-	std::vector<std::vector<double>> minor;
-	for (int i = 0; i < matrix.size(); ++i) {
-		if (i != row) {
-			std::vector<double> tempRow;
-			for (int j = 0; j < matrix[i].size(); ++j) {
-				if (j != col) {
-					tempRow.push_back(matrix[i][j]);
-				}
-			}
-			minor.push_back(tempRow);
-		}
-	}
-	return minor;
-}
+using namespace std;
 
-// Рекурсивная функция для вычисления определителя матрицы
-double determinant(const std::vector<std::vector<double>>& matrix) {
+int main() {
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
 
-	if (matrix.size() == 2) {
-		return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
-	}
+    char choice;
+    cout << "Выберите действие:\n 1)Умножение матрицы на число\n 2)Сложение двух матриц\n 3)Умножение двух матриц\n 4)Нахождение определителя\n ";
+    cin >> choice;
 
-	double det = 0;
-	int sign = 1;
-	for (int i = 0; i < matrix.size(); ++i) {
-		det += sign * matrix[0][i] * determinant(getMinor(matrix, 0, i));
-		sign = -sign;
-	}
+    while (std::cin.get() != '\n');
 
-	return det;
+    switch (choice) {
+    case '1': {
+        std::vector<std::vector<double>> matrix = inputMatrix();
+        cout << "Введенная матрица:\n";
+        displayMatrix(matrix);
+        auto resultMatrix = multiplyMatrixByNumber(matrix);
+        cout << "\nРезультат умножения:\n";
+        displayMatrix(resultMatrix);
+        break;
+    }
+    case '2': {
+        cout << "In progress";
+        break;
+    }
+    case '3': {
+        cout << "Введите матрицу A:\n";
+        std::vector<std::vector<double>> firstMatrix = inputMatrix();
+        if (firstMatrix.empty()) {
+            return 1;
+        }
+        cout << "Введенная матрица:\n";
+        displayMatrix(firstMatrix);
+
+        cout << "Введите матрицу B:\n";
+        std::vector<std::vector<double>> secondMatrix = inputMatrix();
+        if (secondMatrix.empty()) {
+            return 1;
+        }
+        cout << "Введенная матрица:\n";
+        displayMatrix(secondMatrix);
+
+        if (firstMatrix[0].size() != secondMatrix.size()) {
+            cerr << "Невозможно выполнить умножение матриц: матрицы не согласованны";
+            return 1;
+        }
+        auto resultMatrix = multiplyMatrixByMatrix(firstMatrix, secondMatrix);
+        cout << "A x B:\n";
+        displayMatrix(resultMatrix);
+        break;
+    }
+    case '4': {
+        cout << "\n\nНахождение определителя\n\n";
+        std::vector<std::vector<double>> matrix = inputMatrix();
+        if (matrix.empty()) {
+            return 1;
+        }
+        cout << "Введенная матрица:\n";
+        displayMatrix(matrix);
+        if (matrix.size() != matrix[0].size()) {
+            cerr << "Матрица должна быть квадратной";
+            return 1;
+        }
+        double det = determinant(matrix);
+        cout << "Определитель матрицы = " << det;
+        break;
+    }
+    default: {
+        cout << "Такого варианта нету";
+    }
+    }
+
+    return 0;
 }
