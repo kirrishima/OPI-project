@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<vector>
 #include "determinant.h"
 
@@ -6,7 +6,7 @@ std::vector<std::vector<double>> inverseMatrix(const std::vector<std::vector<dou
 	double det = determinant(matrix);
 	std::vector<std::vector<double>> inversematrix(matrix.size(), std::vector<double>(matrix.size()));
 	if (det == 0)
-		std::cout << "Íàéòè îáðàòíóþ ìàòðèöó íåâîçìîæíî, ò.ê. ìàòðèöà âûðîæäåííàÿ\n";
+		std::cout << "ÐÐ°Ð¹Ñ‚Ð¸ Ð¾Ð±Ñ€Ð°Ñ‚Ð½ÑƒÑŽ Ð¼Ð°Ñ‚Ñ€Ð¸Ñ†Ñƒ Ð½ÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾, Ñ‚.Ðº. Ð¼Ð°Ñ‚Ñ€Ð¸Ñ†Ð° Ð²Ñ‹Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð½Ð°Ñ\n";
 	else {
 
 		for (int i = 0; i < matrix.size(); ++i) {
