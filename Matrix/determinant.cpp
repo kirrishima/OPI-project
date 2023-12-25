@@ -25,7 +25,7 @@ double determinant(const std::vector<std::vector<double>>& matrix) {
 		return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 	}
 	if (matrix.size() == 1) {
-		return matrix[1][1];
+		return matrix[0][0];
 	}
 
 	double det = 0;
