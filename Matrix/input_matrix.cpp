@@ -10,7 +10,7 @@
 using namespace std;
 
 // Функция для ввода матрицы
-std::vector<std::vector<double>> inputMatrix() {
+std::vector<std::vector<double>> inputMatrix(char mode) {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	std::vector<std::vector<double>> matrix;
@@ -28,6 +28,11 @@ std::vector<std::vector<double>> inputMatrix() {
 
 		if (rows <= 0 || cols <= 0) {
 			cerr << "Ошибка: Некорректные размеры матрицы." << endl;
+			return matrix;
+		}
+
+		if (mode != '1' && rows != cols) {
+			cerr << "Матрица должна быть квадратной";
 			return matrix;
 		}
 
