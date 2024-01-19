@@ -60,13 +60,13 @@ std::vector<std::vector<double>> inputMatrix(char mode) {
 					row.push_back(num);
 				}
 				catch (const invalid_argument&) {
-					cerr << "Ошибка: Некорректное значение в строке или тип данных." << endl;
+					fprintf(stderr, "Ошибка: Некорректное значение в строке или тип данных. (%s)\n", token.c_str());
 					errorPrinted = true;
 					--i;
 					break;
 				}
 				catch (const out_of_range&) {
-					cerr << "Ошибка: Число вне допустимого диапазона." << endl;
+					fprintf(stderr, "Ошибка: Число вне допустимого диапазона. (%s)\n", token.c_str());
 					--i;
 					errorPrinted = true;
 					break;
